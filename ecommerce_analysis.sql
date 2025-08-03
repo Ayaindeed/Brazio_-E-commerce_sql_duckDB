@@ -50,28 +50,24 @@ UNION ALL
 SELECT 'sellers', COUNT(*) FROM main.sellers;
 
 
--- Check duplicates in orders
+-- Check duplicates in tables
 
 SELECT order_id, COUNT(*) AS n
 FROM main.orders
 GROUP BY order_id
 HAVING COUNT(*) > 1;
 
--- Check duplicates in order_items
-
 SELECT order_id, order_item_id, COUNT(*) AS n
 FROM main.order_items
 GROUP BY order_id, order_item_id
 HAVING COUNT(*) > 1;
-
--- Check duplicates in payments
 
 SELECT order_id, payment_sequential, COUNT(*) AS n
 FROM main.payments
 GROUP BY order_id, payment_sequential
 HAVING COUNT(*) > 1;
 
--- Step 2: Create Simple Views
+-- Step 2: Create Simple Views For us to use!
 CREATE VIEW clean_orders AS
 SELECT * FROM main.orders;
 
@@ -457,14 +453,14 @@ ORDER BY revenue_share_pct DESC;
 
 
 -- A CROSS JOIN creates a Cartesian product — every row in the first table gets combined with every row in the second table.
--- Since totals is a signel row CTE (only contains nat_orders and nat_revenue)
+-- Since totals is a single row CTE (only contains nat_orders and nat_revenue)
 -- We use CROSS JOIN to add the nat_orders and nat_revenue columns to every row from city_stats.
 -- CROSS JOIN does: it merges each row from city_stats with the single-row result from totals
 
 
 /*
 
-✅ When is CROSS JOIN safe?
+When is CROSS JOIN safe?
 It’s safe when:
 
 One of the tables has exactly one row, like in your case (totals)
@@ -623,7 +619,7 @@ ORDER BY customer_count DESC;
 -- KPI 1 · Payment Method Preferences
 -- ##############################
 
--- Analyze which payment methods customers prefer and their revenue impact
+-- Which payment methods customers prefer and their revenue impact
 
 WITH payment_analysis AS (
     SELECT
@@ -713,7 +709,7 @@ SELECT
     ROUND(100.0 * rp.orders / st.total_orders, 2) AS payment_method_pct
 FROM regional_payments rp
 JOIN state_totals st ON rp.state = st.state
-WHERE st.total_orders >= 1000  -- Focus on states with significant volume
+WHERE st.total_orders >= 1000  
 ORDER BY rp.state, rp.orders DESC;
 
 /*
