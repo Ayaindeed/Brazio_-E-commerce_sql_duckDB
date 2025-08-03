@@ -119,6 +119,5 @@ Download the **Brazilian E-Commerce Public Dataset by Olist** from Kaggle:
 
 ## Tutorial Credit
 
-This project follows the tutorial by **Anas Riad**:
-- **Video**: "SQL + DuckDB - Data Analyst Portfolio Project E-commerce"
+This project follows the tutorial by **Anas Riad**: "SQL + DuckDB - Data Analyst Portfolio Project E-commerce"
 - **Link**: https://www.youtube.com/watch?v=JqFxZUcRImg
