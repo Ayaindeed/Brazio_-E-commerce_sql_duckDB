@@ -1,0 +1,21 @@
+# Dataset files - too large for git
+data/
+*.csv
+
+# DuckDB files
+*.db
+*.wal
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# IDE files
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Temporary files
+*.tmp
+*.log
